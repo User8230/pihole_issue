@@ -1,0 +1,599 @@
+This process collects information from your Pi-hole, and optionally uploads it to a unique and random directory on tricorder.pi-hole.net.
+
+The intent of this script is to allow users to self-diagnose their installations.  This is accomplished by running tests against our software and providing the user with links to FAQ articles when a problem is detected.  Since we are a small team and Pi-hole has been growing steadily, it is our hope that this will help us spend more time on development.
+
+NOTE: All log files auto-delete after 48 hours and ONLY the Pi-hole developers can access your data via the given token. We have taken these extra steps to secure your data and will work to further reduce any personal information gathered.
+
+[95m*** [ INITIALIZING ][0m
+[i] 2023-05-17:15:53:38 debug log has been initialized.
+[i] System has been running for 2 days, 22 hours, 36 minutes
+
+[95m*** [ INITIALIZING ][0m Sourcing setup variables
+[i] Sourcing /etc/pihole/setupVars.conf...
+
+[95m*** [ DIAGNOSING ]:[0m Core version
+[[32m✓[0m] Version: v5.16.2
+[i] Remotes: origin	https://github.com/pi-hole/pi-hole.git (fetch)
+             origin	https://github.com/pi-hole/pi-hole.git (push)
+[i] Branch: [32mmaster[0m
+[i] Commit: v5.16.2-0-gd885e92
+
+[95m*** [ DIAGNOSING ]:[0m Web version
+[[32m✓[0m] Version: v5.19
+[i] Remotes: origin	https://github.com/pi-hole/AdminLTE.git (fetch)
+             origin	https://github.com/pi-hole/AdminLTE.git (push)
+[i] Branch: [32mmaster[0m
+[i] Commit: v5.19-0-gd7f1842
+
+[95m*** [ DIAGNOSING ]:[0m FTL version
+[[32m✓[0m] Version: v5.22
+[i] Branch: [32mmaster[0m
+[i] Commit: eb197891
+
+[95m*** [ DIAGNOSING ]:[0m lighttpd version
+[i] 1.4.59
+
+[95m*** [ DIAGNOSING ]:[0m php version
+[i] 7.4.33
+
+[95m*** [ DIAGNOSING ]:[0m Operating system
+[i] Distro: Raspbian
+[i] Version: 11
+[[91m✗[0m] dig return code: [91m10[0m
+[[91m✗[0m] dig response: dig: couldn't get address for 'ns1.pi-hole.net': failure
+[[91m✗[0m] Error: [91mdig command failed - Unable to check OS[0m
+
+[95m*** [ DIAGNOSING ]:[0m SELinux
+[i] [32mSELinux not detected[0m
+
+[95m*** [ DIAGNOSING ]:[0m FirewallD
+[i] [32mFirewalld service inactive[0m
+
+[95m*** [ DIAGNOSING ]:[0m Processor
+[[32m✓[0m] [32marmv6l[0m
+
+[95m*** [ DIAGNOSING ]:[0m Disk usage
+   Filesystem      Size  Used Avail Use% Mounted on
+   /dev/root        15G  1.5G   13G  11% /
+   devtmpfs         87M     0   87M   0% /dev
+   tmpfs           215M  2.1M  213M   1% /dev/shm
+   tmpfs            86M  984K   85M   2% /run
+   tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+   /dev/mmcblk0p1  255M   51M  205M  20% /boot
+   tmpfs            43M     0   43M   0% /run/user/1000
+
+[95m*** [ DIAGNOSING ]:[0m Network interfaces and addresses
+   1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+       link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+       inet 127.0.0.1/8 scope host lo
+          valid_lft forever preferred_lft forever
+       inet6 ::1/128 scope host 
+          valid_lft forever preferred_lft forever
+   2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
+       link/ether b8:27:eb:2a:8f:fe brd ff:ff:ff:ff:ff:ff
+   3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+       link/ether 28:a1:eb:02:1d:93 brd ff:ff:ff:ff:ff:ff
+       inet 192.168.1.117/24 brd 192.168.1.255 scope global noprefixroute wlan0
+          valid_lft forever preferred_lft forever
+       inet6 fe80::d8e6:7cee:c7e8:d3ea/64 scope link 
+          valid_lft forever preferred_lft forever
+
+[95m*** [ DIAGNOSING ]:[0m Network routing table
+   default via 192.168.1.1 dev wlan0 src 192.168.1.117 metric 303 
+   192.168.1.0/24 dev wlan0 proto dhcp scope link src 192.168.1.117 metric 303 
+
+[95m*** [ DIAGNOSING ]:[0m Networking
+[[32m✓[0m] IPv4 address(es) bound to the wlan0 interface:
+    192.168.1.117/24
+
+[[32m✓[0m] IPv6 address(es) bound to the wlan0 interface:
+    fe80::d8e6:7cee:c7e8:d3ea/64
+
+[i] Default IPv4 gateway(s):
+     192.168.1.1
+   * Pinging first gateway 192.168.1.1...
+[[32m✓[0m] [32mGateway responded.[0m
+[i] Default IPv6 gateway(s):
+
+[95m*** [ DIAGNOSING ]:[0m Ports in use
+[[32m✓[0m] [32mudp:0.0.0.0:53[0m is in use by [32mpihole-FTL[0m
+    udp:0.0.0.0:68 is in use by dhcpcd
+    udp:0.0.0.0:35673 is in use by pihole-FTL
+    udp:0.0.0.0:52668 is in use by pihole-FTL
+    udp:0.0.0.0:44486 is in use by pihole-FTL
+    udp:0.0.0.0:51919 is in use by pihole-FTL
+    udp:0.0.0.0:52957 is in use by pihole-FTL
+    udp:0.0.0.0:5353 is in use by avahi-daemon
+    udp:0.0.0.0:33019 is in use by pihole-FTL
+    udp:0.0.0.0:35328 is in use by avahi-daemon
+    udp:0.0.0.0:46616 is in use by pihole-FTL
+[[32m✓[0m] [32mudp:*:53[0m is in use by [32mpihole-FTL[0m
+    udp:*:33476 is in use by avahi-daemon
+    udp:*:5353 is in use by avahi-daemon
+[[32m✓[0m] [32mtcp:127.0.0.1:4711[0m is in use by [32mpihole-FTL[0m
+[[32m✓[0m] [32mtcp:0.0.0.0:80[0m is in use by [32mlighttpd[0m
+    tcp:0.0.0.0:22 is in use by sshd
+[[32m✓[0m] [32mtcp:0.0.0.0:53[0m is in use by [32mpihole-FTL[0m
+[[32m✓[0m] [32mtcp:[::1]:4711[0m is in use by [32mpihole-FTL[0m
+[[32m✓[0m] [32mtcp:[::]:80[0m is in use by [32mlighttpd[0m
+    tcp:[::]:22 is in use by sshd
+[[32m✓[0m] [32mtcp:[::]:53[0m is in use by [32mpihole-FTL[0m
+
+[95m*** [ DIAGNOSING ]:[0m Name resolution (IPv4) using a random blocked domain and a known ad-serving domain
+[[32m✓[0m] www.lukplotno.site [32mis 0.0.0.0[0m on [96mlo[0m ([96m127.0.0.1[0m)
+[[32m✓[0m] No IPv4 address available on [96meth0[0m
+[[32m✓[0m] www.lukplotno.site [32mis 0.0.0.0[0m on [96mwlan0[0m ([96m192.168.1.117[0m)
+[[91m✗[0m] [91mFailed to resolve[0m doubleclick.com via [91ma remote, public DNS server[0m (8.8.8.8)
+
+[95m*** [ DIAGNOSING ]:[0m Name resolution (IPv6) using a random blocked domain and a known ad-serving domain
+[[32m✓[0m] www.olx-pl-id95iw.belladiosadr.com [32mis ::[0m on [96mlo[0m ([96m::1[0m)
+[[32m✓[0m] No IPv6 address available on [96meth0[0m
+[[32m✓[0m] www.olx-pl-id95iw.belladiosadr.com [32mis ::[0m on [96mwlan0[0m ([96mfe80::d8e6:7cee:c7e8:d3ea[0m)
+[[91m✗[0m] [91mFailed to resolve[0m doubleclick.com via [91ma remote, public DNS server[0m (2001:4860:4860::8888)
+
+[95m*** [ DIAGNOSING ]:[0m Discovering active DHCP servers (takes 10 seconds)
+   Scanning all your interfaces for DHCP servers
+   Timeout: 10 seconds
+   
+   * Received 300 bytes from wlan0:192.168.1.1
+     Offered IP address: 192.168.1.117
+     Server IP address: N/A
+     Relay-agent IP address: N/A
+     BOOTP server: (empty)
+     BOOTP file: (empty)
+     DHCP options:
+      Message type: DHCPOFFER (2)
+      server-identifier: 192.168.1.1
+      lease-time: 259200 ( 3d )
+      netmask: 255.255.255.0
+      router: 192.168.1.1
+      dns-server: 192.168.1.1
+      renewal-time: 129600 ( 1d 12h )
+      rebinding-time: 226800 ( 2d 15h )
+      broadcast: 192.168.1.255
+      domain-name: "home"
+      --- end of options ---
+    
+   DHCP packets received on interface wlan0: 1
+   DHCP packets received on interface lo: 0
+   DHCP packets received on interface eth0: 0
+
+[95m*** [ DIAGNOSING ]:[0m Pi-hole processes
+[[32m✓[0m] [32mlighttpd[0m daemon is [32mactive[0m
+[[32m✓[0m] [32mpihole-FTL[0m daemon is [32mactive[0m
+
+[95m*** [ DIAGNOSING ]:[0m Pi-hole-FTL full status
+   ● pihole-FTL.service - Pi-hole FTL
+     Loaded: loaded (/etc/systemd/system/pihole-FTL.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2023-05-17 15:53:20 PDT; 1min 1s ago
+    Process: 29927 ExecStartPre=/opt/pihole/pihole-FTL-prestart.sh (code=exited, status=0/SUCCESS)
+   Main PID: 29940 (pihole-FTL)
+      Tasks: 19 (limit: 414)
+        CPU: 4.905s
+     CGroup: /system.slice/pihole-FTL.service
+             └─29940 /usr/bin/pihole-FTL -f
+
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.203 29940M]    MOZILLA_CANARY: Enabled
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.204 29940M]    PIHOLE_PTR: internal PTR generation enabled (pi.hole)
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.204 29940M]    ADDR2LINE: Enabled
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.205 29940M]    REPLY_WHEN_BUSY: Drop queries when the database is busy
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.205 29940M]    BLOCK_TTL: 2 seconds
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.206 29940M]    BLOCK_ICLOUD_PR: Enabled
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.206 29940M]    CHECK_LOAD: Enabled
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.207 29940M]    CHECK_SHMEM: Warning if shared-memory usage exceeds 90%
+May 17 15:53:21 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.207 29940M]    CHECK_DISK: Warning if certain disk usage exceeds 90%
+May 17 15:53:27 raspberrypi pihole-FTL[29940]: [2023-05-17 15:53:21.209 29940M] Finishe
+
+[95m*** [ DIAGNOSING ]:[0m Lighttpd configuration test
+[[32m✓[0m] [32mNo error in lighttpd configuration[0m
+
+[95m*** [ DIAGNOSING ]:[0m Setup variables
+    PIHOLE_INTERFACE=wlan0
+    QUERY_LOGGING=true
+    INSTALL_WEB_SERVER=true
+    INSTALL_WEB_INTERFACE=true
+    LIGHTTPD_ENABLED=true
+    CACHE_SIZE=10000
+    DNS_FQDN_REQUIRED=true
+    DNS_BOGUS_PRIV=true
+    DNSMASQ_LISTENING=local
+    BLOCKING_ENABLED=true
+    DNSSEC=false
+    REV_SERVER=false
+    TEMPERATUREUNIT=C
+    PIHOLE_DNS_1=8.8.8.8
+    PIHOLE_DNS_2=8.8.4.4
+
+[95m*** [ DIAGNOSING ]:[0m Dashboard headers
+[[32m✓[0m] Web interface X-Header: [32mX-Pi-hole: The Pi-hole Web interface is working![0m
+
+[95m*** [ DIAGNOSING ]:[0m Pi-hole FTL Query Database
+[32m-rw-rw-r-- 1 pihole pihole 5.3M May 17 15:54 /etc/pihole/pihole-FTL.db[0m
+
+[95m*** [ DIAGNOSING ]:[0m Gravity Database
+[32m-rw-rw-r-- 1 pihole pihole 12M May  9 12:41 /etc/pihole/gravity.db[0m
+
+[95m*** [ DIAGNOSING ]:[0m Info table
+   property              value                                   
+   --------------------  ----------------------------------------
+   version               15                                      
+   updated               1683661271                              
+   abp_domains           0                                       
+   gravity_count         177487                                  
+   Last gravity run finished at: [96mTue May  9 12:41:11 PDT 2023[0m
+
+   [96m----- First 10 Gravity Domains -----[0m
+   localhost.localdomain
+   ck.getcookiestxt.com
+   eu1.clevertap-prod.com
+   wizhumpgyros.com
+   coccyxwickimp.com
+   webmail-who-int.000webhostapp.com
+   010sec.com
+   01mspmd5yalky8.com
+   0byv9mgbn0.com
+   ns6.0pendns.org
+
+
+[95m*** [ DIAGNOSING ]:[0m Groups
+   id    enabled  name                                                date_added           date_modified        description                                       
+   ----  -------  --------------------------------------------------  -------------------  -------------------  --------------------------------------------------
+   0           1  Default                                             2023-05-09 12:40:34  2023-05-09 12:40:34  The default group                                 
+
+[95m*** [ DIAGNOSING ]:[0m Domainlist (0/1 = exact white-/blacklist, 2/3 = regex white-/blacklist)
+
+[95m*** [ DIAGNOSING ]:[0m Clients
+
+[95m*** [ DIAGNOSING ]:[0m Adlists
+   id     enabled  group_ids     address                                                                                               date_added           date_modified        comment                                           
+   -----  -------  ------------  ----------------------------------------------------------------------------------------------------  -------------------  -------------------  --------------------------------------------------
+   1            1  0             https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts                                      2023-05-09 12:40:34  2023-05-09 12:40:34  Migrated from /etc/pihole/adlists.list            
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/pihole[0m
+
+[32m-rw-r--r-- 1 root root 22 May  9 13:35 /etc/pihole/custom.list[0m
+   192.168.1.117 pi.hole
+
+[32m-rw-r--r-- 1 root root 65 May  9 12:41 /etc/pihole/local.list[0m
+
+[32m-rw-r--r-- 1 root root 241 May  9 12:39 /etc/pihole/logrotate[0m
+   /var/log/pihole/pihole.log {
+   	su root root
+   	daily
+   	copytruncate
+   	rotate 5
+   	compress
+   	delaycompress
+   	notifempty
+   	nomail
+   }
+   /var/log/pihole/FTL.log {
+   	su root root
+   	weekly
+   	copytruncate
+   	rotate 3
+   	compress
+   	delaycompress
+   	notifempty
+   	nomail
+   }
+
+[32m-rw-rw-r-- 1 pihole root 146 May 17 15:53 /etc/pihole/pihole-FTL.conf[0m
+   PRIVACYLEVEL=0
+   RATE_LIMIT=1000/60
+
+[32m-rw-r--r-- 1 root root 280 May 17 14:52 /etc/pihole/versions[0m
+   CORE_VERSION=v5.16.2
+   CORE_BRANCH=master
+   CORE_HASH=d885e926
+   GITHUB_CORE_VERSION=
+   GITHUB_CORE_HASH=
+   WEB_VERSION=v5.19
+   WEB_BRANCH=master
+   WEB_HASH=d7f18428
+   GITHUB_WEB_VERSION=
+   GITHUB_WEB_HASH=
+   FTL_VERSION=v5.22
+   FTL_BRANCH=master
+   FTL_HASH=eb197891
+   GITHUB_FTL_VERSION=
+   GITHUB_FTL_HASH=
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/dnsmasq.d[0m
+
+[32m-rw-r--r-- 1 root root 1.4K May 17 15:53 /etc/dnsmasq.d/01-pihole.conf[0m
+   addn-hosts=/etc/pihole/local.list
+   addn-hosts=/etc/pihole/custom.list
+   localise-queries
+   no-resolv
+   log-queries
+   log-facility=/var/log/pihole/pihole.log
+   log-async
+   cache-size=10000
+   server=8.8.8.8
+   server=8.8.4.4
+   domain-needed
+   expand-hosts
+   bogus-priv
+   local-service
+
+[32m-rw-r--r-- 1 root root 2.2K May  9 12:39 /etc/dnsmasq.d/06-rfc6761.conf[0m
+   server=/test/
+   server=/localhost/
+   server=/invalid/
+   server=/bind/
+   server=/onion/
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/lighttpd[0m
+
+[32m-rw-r--r-- 1 root root 2.2K Jan 19  2022 /etc/lighttpd/lighttpd.conf[0m
+   server.modules = (
+   	"mod_indexfile",
+   	"mod_access",
+   	"mod_alias",
+    	"mod_redirect",
+   )
+   server.document-root        = "/var/www/html"
+   server.upload-dirs          = ( "/var/cache/lighttpd/uploads" )
+   server.errorlog             = "/var/log/lighttpd/error.log"
+   server.pid-file             = "/run/lighttpd.pid"
+   server.username             = "www-data"
+   server.groupname            = "www-data"
+   server.port                 = 80
+   server.feature-flags       += ("server.h2proto" => "enable")
+   server.feature-flags       += ("server.h2c"     => "enable")
+   server.feature-flags       += ("server.graceful-shutdown-timeout" => 5)
+   server.http-parseopts = (
+     "header-strict"           => "enable",# default
+     "host-strict"             => "enable",# default
+     "host-normalize"          => "enable",# default
+     "url-normalize-unreserved"=> "enable",# recommended highly
+     "url-normalize-required"  => "enable",# recommended
+     "url-ctrls-reject"        => "enable",# recommended
+     "url-path-2f-decode"      => "enable",# recommended highly (unless breaks app)
+     "url-path-dotseg-remove"  => "enable",# recommended highly (unless breaks app)
+   )
+   index-file.names            = ( "index.php", "index.html" )
+   url.access-deny             = ( "~", ".inc" )
+   static-file.exclude-extensions = ( ".php", ".pl", ".fcgi" )
+   include_shell "/usr/share/lighttpd/use-ipv6.pl " + server.port
+   include_shell "/usr/share/lighttpd/create-mime.conf.pl"
+   include "/etc/lighttpd/conf-enabled/*.conf"
+   server.modules += (
+   	"mod_dirlisting",
+   	"mod_staticfile",
+   )
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/lighttpd/conf.d[0m
+[91m/etc/lighttpd/conf.d does not exist.[0m
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/lighttpd/conf-enabled[0m
+total 0
+lrwxrwxrwx 1 root root 32 May  9 12:39 05-setenv.conf -> ../conf-available/05-setenv.conf
+lrwxrwxrwx 1 root root 35 May  9 12:39 10-accesslog.conf -> ../conf-available/10-accesslog.conf
+lrwxrwxrwx 1 root root 33 May  9 12:39 10-fastcgi.conf -> ../conf-available/10-fastcgi.conf
+lrwxrwxrwx 1 root root 38 May  9 12:39 15-pihole-admin.conf -> ../conf-available/15-pihole-admin.conf
+lrwxrwxrwx 1 root root 38 May  9 12:31 99-unconfigured.conf -> ../conf-available/99-unconfigured.conf
+
+[32mlrwxrwxrwx 1 root root 38 May  9 12:39 /etc/lighttpd/conf-enabled/15-pihole-admin.conf -> ../conf-available/15-pihole-admin.conf[0m
+   server.errorlog := "/var/log/lighttpd/error-pihole.log"
+   $HTTP["url"] =~ "^/admin/" {
+       server.document-root = "/var/www/html"
+       server.stream-response-body = 1
+       accesslog.filename = "/var/log/lighttpd/access-pihole.log"
+       accesslog.format = "%{%s}t|%h|%V|%r|%s|%b"
+       fastcgi.server = (
+           ".php" => (
+               "localhost" => (
+                   "socket" => "/run/lighttpd/pihole-php-fastcgi.socket",
+                   "bin-path" => "/usr/bin/php-cgi",
+                   "min-procs" => 1,
+                   "max-procs" => 1,
+                   "bin-environment" => (
+                       "PHP_FCGI_CHILDREN" => "4",
+                       "PHP_FCGI_MAX_REQUESTS" => "10000",
+                   ),
+                   "bin-copy-environment" => (
+                       "PATH", "SHELL", "USER"
+                   ),
+                   "broken-scriptfilename" => "enable",
+               )
+           )
+       )
+       setenv.add-response-header = (
+           "X-Pi-hole" => "The Pi-hole Web interface is working!",
+           "X-Frame-Options" => "DENY",
+           "X-XSS-Protection" => "0",
+           "X-Content-Type-Options" => "nosniff",
+           "Content-Security-Policy" => "default-src 'self' 'unsafe-inline';",
+           "X-Permitted-Cross-Domain-Policies" => "none",
+           "Referrer-Policy" => "same-origin"
+       )
+       $HTTP["url"] =~ "^/admin/\." {
+           url.access-deny = ("")
+       }
+       $HTTP["url"] =~ "/(teleporter|api_token)\.php$" {
+           $HTTP["referer"] =~ "/admin/settings\.php" {
+               setenv.set-response-header = ( "X-Frame-Options" => "SAMEORIGIN" )
+           }
+       }
+   }
+   else $HTTP["url"] == "/admin" {
+       url.redirect = ("" => "/admin/")
+   }
+   $HTTP["host"] == "pi.hole" {
+       $HTTP["url"] == "/" {
+           url.redirect = ("" => "/admin/")
+       }
+   }
+   server.modules += ( "mod_access", "mod_accesslog", "mod_redirect", "mod_fastcgi", "mod_setenv" )
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc/cron.d[0m
+
+[32m-rw-r--r-- 1 root root 1.7K May  9 12:39 /etc/cron.d/pihole[0m
+   26 4   * * 7   root    PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updateGravity >/var/log/pihole/pihole_updateGravity.log || cat /var/log/pihole/pihole_updateGravity.log
+   00 00   * * *   root    PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole flush once quiet
+   @reboot root /usr/sbin/logrotate --state /var/lib/logrotate/pihole /etc/pihole/logrotate
+   51 14  * * *   root    PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updatechecker
+   @reboot root    PATH="$PATH:/usr/sbin:/usr/local/bin/" pihole updatechecker reboot
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/var/log/lighttpd[0m
+
+[32m-rw-r--r-- 1 www-data www-data 141 May 14 17:17 /var/log/lighttpd/error-pihole.log[0m
+   [96m-----head of error-pihole.log------[0m
+   2023-05-14 00:00:10: server.c.1787) logfiles cycled UID = 0 PID = 11285
+   2023-05-14 17:17:47: server.c.1513) server started (lighttpd/1.4.59)
+
+   [96m-----tail of error-pihole.log------[0m
+   2023-05-14 00:00:10: server.c.1787) logfiles cycled UID = 0 PID = 11285
+   2023-05-14 17:17:47: server.c.1513) server started (lighttpd/1.4.59)
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/var/log/pihole[0m
+
+[32m-rw-r--r-- 1 pihole pihole 48K May 17 15:53 /var/log/pihole/FTL.log[0m
+   [96m-----head of FTL.log------[0m
+   [2023-05-17 00:27:30.144 471M] Resizing "FTL-queries" from 720896 to (20480 * 44) == 901120 (/dev/shm: 1.9MB used, 225.1MB total, FTL uses 1.9MB)
+   [2023-05-17 09:54:56.572 471M] Resizing "FTL-queries" from 901120 to (24576 * 44) == 1081344 (/dev/shm: 2.1MB used, 225.1MB total, FTL uses 2.1MB)
+   [2023-05-17 13:05:06.094 471M] Resizing "FTL-dns-cache" from 53248 to (3584 * 16) == 57344 (/dev/shm: 2.3MB used, 225.1MB total, FTL uses 2.3MB)
+   [2023-05-17 15:43:56.517 471M] Shutting down...
+   [2023-05-17 15:43:56.834 471M] Finished final database update (stored 12 queries)
+   [2023-05-17 15:43:56.835 471M] Waiting for threads to join
+   [2023-05-17 15:43:56.835 471M] Thread database (0) is idle, terminating it.
+   [2023-05-17 15:43:56.838 471M] Thread housekeeper (1) is idle, terminating it.
+   [2023-05-17 15:43:56.839 471M] Thread DNS client (2) is idle, terminating it.
+   [2023-05-17 15:43:56.841 471M] All threads joined
+   [2023-05-17 15:43:56.841 471M] Joining API worker thread 0
+   [2023-05-17 15:43:56.842 471M] Joining API worker thread 1
+   [2023-05-17 15:43:56.844 471M] Joining API worker thread 2
+   [2023-05-17 15:43:56.845 471M] Joining API worker thread 3
+   [2023-05-17 15:43:56.847 471M] Joining API worker thread 4
+   [2023-05-17 15:43:56.859 471M] ########## FTL terminated after 2d 22h 26m 17s  (code 0)! ##########
+   [2023-05-17 15:43:57.778 29226M] Using log file /var/log/pihole/FTL.log
+   [2023-05-17 15:43:57.780 29226M] ########## FTL started on raspberrypi! ##########
+   [2023-05-17 15:43:57.787 29226M] FTL branch: master
+   [2023-05-17 15:43:57.787 29226M] FTL version: v5.22
+   [2023-05-17 15:43:57.788 29226M] FTL commit: eb197891
+   [2023-05-17 15:43:57.789 29226M] FTL date: 2023-03-22 21:21:35 +0000
+   [2023-05-17 15:43:57.789 29226M] FTL user: pihole
+   [2023-05-17 15:43:57.790 29226M] Compiled for armv6hf (compiled on CI) using arm-linux-gnueabihf-gcc (GCC) 10.3.0
+   [2023-05-17 15:43:57.795 29226M] Starting config file parsing (/etc/pihole/pihole-FTL.conf)
+   [2023-05-17 15:43:57.796 29226M]    SOCKET_LISTENING: only local
+   [2023-05-17 15:43:57.799 29226M]    AAAA_QUERY_ANALYSIS: Show AAAA queries
+   [2023-05-17 15:43:57.801 29226M]    MAXDBDAYS: max age for stored queries is 365 days
+   [2023-05-17 15:43:57.802 29226M]    RESOLVE_IPV6: Resolve IPv6 addresses
+   [2023-05-17 15:43:57.802 29226M]    RESOLVE_IPV4: Resolve IPv4 addresses
+   [2023-05-17 15:43:57.803 29226M]    DBINTERVAL: saving to DB file every minute
+   [2023-05-17 15:43:57.803 29226M]    DBFILE: Using /etc/pihole/pihole-FTL.db
+   [2023-05-17 15:43:57.804 29226M]    MAXLOGAGE: Importing up to 24.0 hours of log data
+   [2023-05-17 15:43:57.804 29226M]    PRIVACYLEVEL: Set to 0
+   [2023-05-17 15:43:57.805 29226M]    IGNORE_LOCALHOST: Show queries from localhost
+
+   [96m-----tail of FTL.log------[0m
+   [2023-05-17 15:53:21.270 29940M] PID of FTL process: 29940
+   [2023-05-17 15:53:21.307 29940M] Database version is 12
+   [2023-05-17 15:53:21.308 29940M] Resizing "FTL-strings" from 40960 to (81920 * 1) == 81920 (/dev/shm: 1.2MB used, 225.1MB total, FTL uses 1.2MB)
+   [2023-05-17 15:53:21.324 29940M] Imported 0 alias-clients
+   [2023-05-17 15:53:21.325 29940M] Database successfully initialized
+   [2023-05-17 15:53:21.422 29940M] New upstream server: 208.67.222.222:53 (0/1024)
+   [2023-05-17 15:53:21.494 29940M] New upstream server: 208.67.220.220:53 (1/1024)
+   [2023-05-17 15:53:22.669 29940M] Resizing "FTL-queries" from 180224 to (8192 * 44) == 360448 (/dev/shm: 1.3MB used, 225.1MB total, FTL uses 1.3MB)
+   [2023-05-17 15:53:23.970 29940M] Resizing "FTL-queries" from 360448 to (12288 * 44) == 540672 (/dev/shm: 1.4MB used, 225.1MB total, FTL uses 1.4MB)
+   [2023-05-17 15:53:25.107 29940M] Resizing "FTL-queries" from 540672 to (16384 * 44) == 720896 (/dev/shm: 1.6MB used, 225.1MB total, FTL uses 1.6MB)
+   [2023-05-17 15:53:26.234 29940M] Resizing "FTL-queries" from 720896 to (20480 * 44) == 901120 (/dev/shm: 1.8MB used, 225.1MB total, FTL uses 1.8MB)
+   [2023-05-17 15:53:27.244 29940M] Resizing "FTL-queries" from 901120 to (24576 * 44) == 1081344 (/dev/shm: 2.0MB used, 225.1MB total, FTL uses 2.0MB)
+   [2023-05-17 15:53:27.787 29940M] New upstream server: 8.8.4.4:53 (2/1024)
+   [2023-05-17 15:53:27.870 29940M] New upstream server: 1.1.1.1:53 (3/1024)
+   [2023-05-17 15:53:27.877 29940M] Imported 24182 queries from the long-term database
+   [2023-05-17 15:53:27.879 29940M]  -> Total DNS queries: 24182
+   [2023-05-17 15:53:27.880 29940M]  -> Cached DNS queries: 10992
+   [2023-05-17 15:53:27.880 29940M]  -> Forwarded DNS queries: 12308
+   [2023-05-17 15:53:27.881 29940M]  -> Blocked DNS queries: 551
+   [2023-05-17 15:53:27.881 29940M]  -> Unknown DNS queries: 0
+   [2023-05-17 15:53:27.882 29940M]  -> Unique domains: 729
+   [2023-05-17 15:53:27.882 29940M]  -> Unique clients: 7
+   [2023-05-17 15:53:27.883 29940M]  -> Known forward destinations: 4
+   [2023-05-17 15:53:27.883 29940M] Successfully accessed setupVars.conf
+   [2023-05-17 15:53:27.888 29940M] listening on 0.0.0.0 port 53
+   [2023-05-17 15:53:27.889 29940M] listening on :: port 53
+   [2023-05-17 15:53:27.894 29940M] PID of FTL process: 29940
+   [2023-05-17 15:53:27.894 29940M] Listening on port 4711 for incoming IPv4 telnet connections
+   [2023-05-17 15:53:27.897 29940M] Listening on port 4711 for incoming IPv6 telnet connections
+   [2023-05-17 15:53:27.901 29940M] Listening on port 4711 for incoming socket telnet connections
+   [2023-05-17 15:53:27.906 29940M] INFO: FTL is running as user pihole (UID 999)
+   [2023-05-17 15:53:27.917 29940M] Reloading DNS cache
+   [2023-05-17 15:53:28.031 29940/T29974] Compiled 0 whitelist and 0 blacklist regex filters for 7 clients in 3.8 msec
+   [2023-05-17 15:53:28.033 29940/T29974] Blocking status is enabled
+   [2023-05-17 15:53:29.477 29940M] New upstream server: 8.8.8.8:53 (4/1024)
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/dev/shm[0m
+total 2.1M
+-rw------- 1 pihole pihole 324K May 17 15:53 FTL-clients
+-rw------- 1 pihole pihole  248 May 17 15:53 FTL-counters
+-rw------- 1 pihole pihole 4.0K May 17 15:53 FTL-dns-cache
+-rw------- 1 pihole pihole  20K May 17 15:53 FTL-domains
+-rw------- 1 pihole pihole   56 May 17 15:53 FTL-lock
+-rw------- 1 pihole pihole  12K May 17 15:53 FTL-overTime
+-rw------- 1 pihole pihole 4.0K May 17 15:53 FTL-per-client-regex
+-rw------- 1 pihole pihole 1.1M May 17 15:53 FTL-queries
+-rw------- 1 pihole pihole   16 May 17 15:53 FTL-settings
+-rw------- 1 pihole pihole  80K May 17 15:53 FTL-strings
+-rw------- 1 pihole pihole 604K May 17 15:53 FTL-upstreams
+
+[95m*** [ DIAGNOSING ]:[0m contents of [96m/etc[0m
+
+[32m-rw-r--r-- 1 root root 24 May  9 12:39 /etc/dnsmasq.conf[0m
+   conf-dir=/etc/dnsmasq.d
+
+[32m-rw-r--r-- 1 root root 19 May  9 12:46 /etc/resolv.conf[0m
+   nameserver 8.8.8.8
+
+[95m*** [ DIAGNOSING ]:[0m Pi-hole diagnosis messages
+
+[95m*** [ DIAGNOSING ]:[0m Locale
+    LANG=
+
+[95m*** [ DIAGNOSING ]:[0m Pi-hole log
+[32m-rw-r----- 1 pihole pihole 4.4M May 17 15:54 /var/log/pihole/pihole.log[0m
+   [96m-----head of pihole.log------[0m
+   May 17 00:00:10 dnsmasq[471]: query[PTR] 112.1.168.192.in-addr.arpa from 127.0.0.1
+   May 17 00:00:10 dnsmasq[471]: config 192.168.1.112 is NXDOMAIN
+   May 17 00:00:20 dnsmasq[471]: query[PTR] 222.222.67.208.in-addr.arpa from 127.0.0.1
+   May 17 00:00:20 dnsmasq[471]: forwarded 222.222.67.208.in-addr.arpa to 208.67.222.222
+   May 17 00:00:20 dnsmasq[471]: reply 208.67.222.222 is dns.opendns.com
+   May 17 00:00:20 dnsmasq[471]: query[PTR] 220.220.67.208.in-addr.arpa from 127.0.0.1
+   May 17 00:00:20 dnsmasq[471]: forwarded 220.220.67.208.in-addr.arpa to 208.67.222.222
+   May 17 00:00:20 dnsmasq[471]: reply 208.67.220.220 is dns.opendns.com
+   May 17 00:00:23 dnsmasq[471]: query[A] DELL02E41D.home from 192.168.1.112
+   May 17 00:00:23 dnsmasq[471]: cached DELL02E41D.home is NXDOMAIN
+   May 17 00:00:26 dnsmasq[471]: query[A] DELL02E41D.home from 192.168.1.3
+   May 17 00:00:26 dnsmasq[471]: cached DELL02E41D.home is NXDOMAIN
+   May 17 00:00:30 dnsmasq[471]: query[A] music.youtube.com from 192.168.1.3
+   May 17 00:00:30 dnsmasq[471]: cached music.youtube.com is <CNAME>
+   May 17 00:00:30 dnsmasq[471]: forwarded music.youtube.com to 208.67.222.222
+   May 17 00:00:30 dnsmasq[471]: query[HTTPS] music.youtube.com from 192.168.1.3
+   May 17 00:00:30 dnsmasq[471]: forwarded music.youtube.com to 208.67.222.222
+   May 17 00:00:30 dnsmasq[471]: reply music.youtube.com is NODATA
+   May 17 00:00:30 dnsmasq[471]: query[A] play.google.com from 192.168.1.3
+   May 17 00:00:30 dnsmasq[471]: forwarded play.google.com to 208.67.222.222
+
+   [96m-----tail of pihole.log------[0m
+   May 17 15:54:52 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.8.8
+   May 17 15:54:52 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.4.4
+   May 17 15:54:53 dnsmasq[29940]: query[A] DELL02E41D.home from 192.168.1.112
+   May 17 15:54:53 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.8.8
+   May 17 15:54:53 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.4.4
+   May 17 15:54:53 dnsmasq[29940]: query[A] play.google.com from 192.168.1.112
+   May 17 15:54:53 dnsmasq[29940]: forwarded play.google.com to 8.8.8.8
+   May 17 15:54:53 dnsmasq[29940]: forwarded play.google.com to 8.8.4.4
+   May 17 15:54:53 dnsmasq[29940]: query[A] beacons.gcp.gvt2.com from 192.168.1.112
+   May 17 15:54:53 dnsmasq[29940]: forwarded beacons.gcp.gvt2.com to 8.8.8.8
+   May 17 15:54:53 dnsmasq[29940]: forwarded beacons.gcp.gvt2.com to 8.8.4.4
+   May 17 15:54:55 dnsmasq[29940]: query[A] DELL02E41D.home from 192.168.1.112
+   May 17 15:54:55 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.8.8
+   May 17 15:54:55 dnsmasq[29940]: forwarded DELL02E41D.home to 8.8.4.4
+   May 17 15:54:57 dnsmasq[29940]: query[A] play.google.com from 192.168.1.112
+   May 17 15:54:57 dnsmasq[29940]: forwarded play.google.com to 8.8.8.8
+   May 17 15:54:57 dnsmasq[29940]: forwarded play.google.com to 8.8.4.4
+   May 17 15:54:57 dnsmasq[29940]: query[A] beacons.gcp.gvt2.com from 192.168.1.112
+   May 17 15:54:57 dnsmasq[29940]: forwarded beacons.gcp.gvt2.com to 8.8.8.8
+   May 17 15:54:57 dnsmasq[29940]: forwarded beacons.gcp.gvt2.com to 8.8.4.4
